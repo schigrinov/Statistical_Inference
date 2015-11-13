@@ -2,7 +2,7 @@
 title: "Statistical Inference Assesment Part 2"
 author: "Sergey Chigrinov"
 date: "November 14, 2015"
-output: html_document
+output: pdf_document
 ---
 ##This part is aimed at analysis of the ToothGrowth data in the R datasets package
 ###1. Load the ToothGrowth data and perform some basic exploratory data analyses 
@@ -40,4 +40,6 @@ t.test(len ~ supp, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGro
 ###We can note that there is no significant evidence that the mean of length of teeth is different for different vitamin C delivery methods when the dose equals 2. For all other cases we can reject the null hypotesys and conclude that the impact of the delivery method is significant.
 
 ###4.State your conclusions and the assumptions needed for your conclusions. 
+###For these conclusions, we should assume that there is no other factors that would influence guinea pig tooth growth and the variances between populations are different.
 ###From the graph of Tooth Growth and from the results of t-tests we can conclude that there are evidences that tooth growth depends on the dose of vitamin C. However, the delivery method is important only for small doses, while when dose=2 we can't see the strong evidences that mean tooth growth is different.
+
