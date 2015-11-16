@@ -7,11 +7,11 @@ output: pdf_document
 ##This part is aimed at analysis of the ToothGrowth data in the R datasets package
 ###1. Load the ToothGrowth data and perform some basic exploratory data analyses 
 ```{r}
-library(datasets)
-str(ToothGrowth)
+library(datasets); str(ToothGrowth)
 unique(ToothGrowth$dose)
 suppressWarnings(library(ggplot2)); ggplot(ToothGrowth, aes(x = dose, y = len, color = supp)) + 
-    geom_point(shape = 1) + geom_smooth(method=lm) +  ylab("Tooth Length") + xlab("Vitamin C Dose") + ggtitle("Tooth Growth")
+    geom_point(shape = 1) + geom_smooth(method=lm) +  ylab("Tooth Length") + 
+    xlab("Vitamin C Dose") + ggtitle("Tooth Growth")
 ```
 
 ###The ToothGrowth variable contain 60 observations, and consists of 3 fields - len, supp and dose. "len" stands for tooth length, "supp" stands for the delivery method, and "dose" shows one of the three dose levels.
@@ -25,17 +25,23 @@ summary(ToothGrowth)
 ###3. Use confidence intervals and/or hypothesis tests to compare tooth growth by supp and dose.
 ###In this part we'll check whether we can conclude that there are significant differences in mean length for different subroups (different dose levels and delivery methods). To make paper shorter we show only confidence intervals.
 ```{r}
-t.test(len ~ dose, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose %in% c(0.5,1),])$conf.int
-t.test(len ~ dose, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose %in% c(1,2),])$conf.int
-t.test(len ~ dose, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose %in% c(0.5,2),])$conf.int
+t.test(len ~ dose, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose %in% c(0.5,1),])$conf.int
+t.test(len ~ dose, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose %in% c(1,2),])$conf.int
+t.test(len ~ dose, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose %in% c(0.5,2),])$conf.int
 
 ```
 ###We can reject the null hypotesys in all above cases and reasonably assume that there is a difference in tooth growth for different doses.
 
 ```{r}
-t.test(len ~ supp, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose==0.5,])$conf.int
-t.test(len ~ supp, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose==1,])$conf.int
-t.test(len ~ supp, paired= FALSE, var.equal = FALSE, data = ToothGrowth[ToothGrowth$dose==2,])$conf.int
+t.test(len ~ supp, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose==0.5,])$conf.int
+t.test(len ~ supp, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose==1,])$conf.int
+t.test(len ~ supp, paired= FALSE, var.equal = FALSE, 
+       data = ToothGrowth[ToothGrowth$dose==2,])$conf.int
 ```
 ###We can note that there is no significant evidence that the mean of length of teeth is different for different vitamin C delivery methods when the dose equals 2. For all other cases we can reject the null hypotesys and conclude that the impact of the delivery method is significant.
 
